@@ -1,36 +1,36 @@
 export function getToken() {
   try {
-    return localStorage.getItem('auth_token')
+    return localStorage.getItem('auth_token');
   } catch (err) {
     return {
       error: {
-        message: "There was a problem parsing the token"
-      }
-    }
+        message: 'There was a problem parsing the token',
+      },
+    };
   }
 }
 
 export function setToken(token) {
   try {
-    localStorage.setItem('auth_token', token)
-    return {}
+    localStorage.setItem('auth_token', token);
+    return {};
   } catch (err) {
     return {
       error: {
-        message: "There was a problem parsing the token"
-      }
-    }
+        message: 'There was a problem parsing the token',
+      },
+    };
   }
 }
 
 export function clearToken() {
   try {
-    localStorage.removeItem('auth_token')
+    localStorage.removeItem('auth_token');
   } catch (err) {
     return {
       error: {
-        message: 'There was a problem logging out'
-      }
-    }
+        message: 'There was a problem logging out',
+      },
+    };
   }
 }
