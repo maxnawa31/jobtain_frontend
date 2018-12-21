@@ -15,8 +15,8 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectSignup from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import {signupRequest} from './actions'
-
+import { signupRequest } from './actions';
+import { SignupForm, SignupInput, SignupButton, SignupH1 } from '../../components/StyledComponents/';
 /* eslint-disable react/prefer-stateless-function */
 export class Signup extends React.Component {
   state = {
@@ -27,23 +27,24 @@ export class Signup extends React.Component {
     lastname: '',
   };
 
-  handleChange= (e) => {
-    this.setState({[e.target.name]: e.target.value})
-  }
-  handleSubmit = (e) => {
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  handleSubmit = e => {
     e.preventDefault();
-    this.props.signupRequest({...this.state})
-  }
+    this.props.signupRequest({ ...this.state });
+  };
   render() {
     return (
-      <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-        <input name="email" type="text" />Email
-        <input name="password" type="password" />Password
-        <input name="username" type="text" />Username
-        <input name="firstname" type="text" />First Name
-        <input name="lastname" type="text" />Last Name
-        <button>Sign Up!</button>
-      </form>
+      <SignupForm onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <SignupH1>Start tracking your jobs today!</SignupH1>
+        <SignupInput name="email" type="text" placeholder="Email" />
+        <SignupInput name="password" type="password" placeholder="Password" />
+        <SignupInput name="username" type="text" placeholder="Username" />
+        <SignupInput name="firstname" type="text" placeholder="First Name" />
+        <SignupInput name="lastname" type="text" placeholder="Last Name" />
+        <SignupButton>Sign Up!</SignupButton>
+      </SignupForm>
     );
   }
 }
@@ -58,7 +59,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    signupRequest:(userObj) =>dispatch(signupRequest(userObj)),
+    signupRequest: userObj => dispatch(signupRequest(userObj)),
   };
 }
 

@@ -1,6 +1,7 @@
 import { take, call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOGIN_REQUEST } from './constants';
 import { callAPI } from '../../services/api';
+import {setToken} from '../../services/token';
 // Individual exports for testing
 export function* attemptLogin(action) {
   console.log(action)
@@ -12,7 +13,7 @@ export function* attemptLogin(action) {
       false,
       action.userObj,
     );
-    console.log(response)
+    yield setToken(response.token)
   } catch (error) {}
 }
 
