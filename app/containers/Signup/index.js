@@ -15,6 +15,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectSignup from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import {signupRequest} from './actions'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Signup extends React.Component {
@@ -22,24 +23,25 @@ export class Signup extends React.Component {
     email: '',
     password: '',
     username: '',
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
   };
 
   handleChange= (e) => {
     this.setState({[e.target.name]: e.target.value})
   }
   handleSubmit = (e) => {
-
+    e.preventDefault();
+    this.props.signupRequest({...this.state})
   }
   render() {
     return (
-      <form onChange={this.handleChange}>
-        <input name="email" type="text" />
-        <input name="password" type="password" />
-        <input name="username" type="text" />
-        <input name="firstName" type="text" />
-        <input name="lastName" type="text" />
+      <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <input name="email" type="text" />Email
+        <input name="password" type="password" />Password
+        <input name="username" type="text" />Username
+        <input name="firstname" type="text" />First Name
+        <input name="lastname" type="text" />Last Name
         <button>Sign Up!</button>
       </form>
     );
@@ -47,7 +49,7 @@ export class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  signupRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -56,7 +58,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    signupRequest:(userObj) =>dispatch(signupRequest(userObj)),
   };
 }
 

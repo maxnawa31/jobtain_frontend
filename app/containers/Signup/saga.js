@@ -1,6 +1,20 @@
-// import { take, call, put, select } from 'redux-saga/effects';
-
+import { take, call, put, select, takeLatest } from 'redux-saga/effects';
+import { SIGNUP_REQUEST, SIGNUP_SUCCESSFUL, SIGNUP_ERROR } from './constants';
+import { signupSucessful, signupError } from './actions';
+import { callAPI } from '../../services/api';
+import { push } from 'react-router-redux';
 // Individual exports for testing
-export default function* defaultSaga() {
-  // See example in containers/HomePage/saga.js
+export function* signupUserAsync(action) {
+  console.log(action)
+  try {
+    const response = yield callAPI('POST', '/users', false, action.userObj);
+    yield put(signupSucessful(response));
+    yield put(push('/login'))
+  } catch (error) {
+    put();
+  }
+}
+
+export default function* watchSignupUserAsync() {
+  yield takeLatest(SIGNUP_REQUEST, signupUserAsync);
 }

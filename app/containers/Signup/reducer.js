@@ -13,22 +13,29 @@ import {
 } from './constants';
 
 export const initialState = fromJS({
-  firstName: '',
-  lastName: '',
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
   username: '',
+  error: false,
+  loading: false,
 });
 
 function signupReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
+    case SIGNUP_REQUEST:
+      return state.set('loading', true);
     case SIGNUP_SUCCESSFUL:
-      return {
+      state.set('loading', false)
+      return fromJS({
         ...state,
-        ...action.user,
-      };
+        ...action.userObj,
+      });
+    case SIGNUP_ERROR:
+      return state.set('error', action.error).set('loading', false);
     default:
       return state;
   }

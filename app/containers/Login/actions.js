@@ -20,8 +20,10 @@ export function defaultAction() {
 export function loginRequest(email, password) {
   return {
     type: LOGIN_REQUEST,
-    email,
-    password,
+    userObj: {
+      email,
+      password,
+    },
   };
 }
 

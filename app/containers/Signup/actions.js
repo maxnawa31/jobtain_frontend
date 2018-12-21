@@ -17,15 +17,18 @@ export function defaultAction() {
   };
 }
 
-export function signupRequest() {
+export function signupRequest(userObj) {
   return {
-    type: SIGNUP_REQUEST
+    type: SIGNUP_REQUEST,
+    userObj
   }
 }
 
-export function signupSucessful() {
+export function signupSucessful(userObj) {
+  console.log('inside success function')
   return {
-    type: SIGNUP_SUCCESSFUL
+    type: SIGNUP_SUCCESSFUL,
+    userObj
   }
 }
 
