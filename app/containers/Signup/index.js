@@ -15,8 +15,16 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectSignup from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { Link } from 'react-router-dom';
 import { signupRequest } from './actions';
-import { SignupForm, SignupInput, SignupButton, SignupH1 } from '../../components/StyledComponents/';
+import {
+  SignupForm,
+  SignupInput,
+  SignupButton,
+  SignupH1,
+  SignupContainer,
+  SignupSidePanel,
+} from '../../components/StyledComponents/';
 /* eslint-disable react/prefer-stateless-function */
 export class Signup extends React.Component {
   state = {
@@ -36,15 +44,28 @@ export class Signup extends React.Component {
   };
   render() {
     return (
-      <SignupForm onSubmit={this.handleSubmit} onChange={this.handleChange}>
-        <SignupH1>Start tracking your jobs today!</SignupH1>
-        <SignupInput name="email" type="text" placeholder="Email" />
-        <SignupInput name="password" type="password" placeholder="Password" />
-        <SignupInput name="username" type="text" placeholder="Username" />
-        <SignupInput name="firstname" type="text" placeholder="First Name" />
-        <SignupInput name="lastname" type="text" placeholder="Last Name" />
-        <SignupButton>Sign Up!</SignupButton>
-      </SignupForm>
+      <SignupContainer>
+        <SignupSidePanel />
+        <SignupForm onSubmit={this.handleSubmit} onChange={this.handleChange}>
+          <SignupH1>Start tracking your jobs today!</SignupH1>
+          <SignupInput name="email" type="text" placeholder="Email" />
+          <SignupInput name="password" type="password" placeholder="Password" />
+          <SignupInput name="username" type="text" placeholder="Username" />
+          <SignupInput name="firstname" type="text" placeholder="First Name" />
+          <SignupInput name="lastname" type="text" placeholder="Last Name" />
+          <SignupButton>Sign Up!</SignupButton>
+        </SignupForm>
+        <SignupSidePanel>
+          <SignupButton>
+            <Link
+              style={{ textDecoration: 'none', color: 'black' }}
+              to="/login"
+            >
+              Log in
+            </Link>
+          </SignupButton>
+        </SignupSidePanel>
+      </SignupContainer>
     );
   }
 }

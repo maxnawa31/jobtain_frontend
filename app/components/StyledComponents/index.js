@@ -5,7 +5,6 @@ export const SignupForm = styled.form`
   flex-direction: column;
   height: 80vh;
   width: 40%;
-  // border: 1px solid black;
   margin: 0 auto;
   margin-top: 5%;
 `;
@@ -40,3 +39,15 @@ export const SignupH1 = styled.h1`
   font-weight: lighter;
   margin-top: 5%;
 `
+export const SignupContainer = styled.div`
+  display: flex;
+  flex-direction:row;
+`
+export const SignupSidePanel = styled.div`
+  background-color: rgb(245,247,250);
+  height: 100vh;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+`
+

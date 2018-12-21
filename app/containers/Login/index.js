@@ -9,13 +9,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import {Link} from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectLogin from './selectors';
 import reducer from './reducer';
 import { loginRequest } from './actions';
 import saga from './saga';
+import { LoginForm, LoginInput, LoginButton, LoginSpan, LoginH1 } from '../../components/StyledComponents/LoginStyledComponents';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.Component {
@@ -35,23 +36,25 @@ export class Login extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleLogin} action="">
-          <input
+
+        <LoginForm onSubmit={this.handleLogin} action="">
+        <LoginH1>Start tracking your jobs today</LoginH1>
+          <LoginInput
             onChange={this.handleChange}
             name="email"
             type="text"
             placeholder="Email"
           />
-          <input
+          <LoginInput
             onChange={this.handleChange}
             name="password"
             type="password"
             placeholder="Password"
           />
-          <button type="submit" placeholder="submit">
-            Submit
-          </button>
-        </form>
+          <LoginButton login type="submit" placeholder="Log In">Log In</LoginButton>
+          <LoginSpan>Or</LoginSpan>
+          <LoginButton type="submit" placeholder="Log In"><Link style={{textDecoration:'none', color:'black'}} to='/signup'>Sign Up</Link></LoginButton>
+        </LoginForm>
       </div>
     );
   }
