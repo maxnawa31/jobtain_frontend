@@ -13,8 +13,10 @@ import {
 } from './constants';
 
 export const initialState = fromJS({
-  email: '',
-  password: '',
+  requesting: false,
+  successful: false,
+  messages: [],
+  erros: [],
 });
 
 function loginReducer(state = initialState, action) {
@@ -22,7 +24,27 @@ function loginReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
     case LOGIN_REQUEST:
-      return state.set('email', action.email, 'password', action.password);
+      return state
+        .set('requesting', true)
+        .set('successful', false)
+        .set('messages', [{ body: 'Loggin in...', time: new Date() }]);
+    case LOGIN_SUCCESSFUL:
+      return state
+        .set('errors', [])
+        .set('messages', [])
+        .set('requesting', false)
+        .set('successful', true);
+    case LOGIN_ERROR:
+      return state
+        .set(
+          'errors',
+          state.errors.concat([
+            { body: action.error.toString(), time: new Date() },
+          ]),
+        )
+        .set('messages', [])
+        .set('requesting', false)
+        .set('successful', false);
     default:
       return state;
   }

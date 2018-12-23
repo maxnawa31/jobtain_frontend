@@ -25,7 +25,7 @@ export function signupRequest(userObj) {
 }
 
 export function signupSucessful(userObj) {
-  console.log('inside success function')
+
   return {
     type: SIGNUP_SUCCESSFUL,
     userObj

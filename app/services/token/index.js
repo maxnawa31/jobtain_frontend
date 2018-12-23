@@ -29,7 +29,7 @@ export function clearToken() {
   } catch (err) {
     return {
       error: {
-        message: 'There was a problem logging out',
+        message: 'There was a problem logging outf',
       },
     };
   }

@@ -11,7 +11,7 @@ export function* signupUserAsync(action) {
     yield put(signupSucessful(response));
     yield put(push('/login'))
   } catch (error) {
-    put();
+    yield put(signupError(error));
   }
 }
 
