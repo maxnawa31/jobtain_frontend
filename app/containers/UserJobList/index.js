@@ -19,6 +19,7 @@ import Table from '../../components/Table';
 import TableHeader from '../../components/Table/TableHeader';
 import TableRow from '../../components/Table/TableRow';
 import TableData from '../../components/Table/TableData';
+import Client from '../Client'
 /* eslint-disable react/prefer-stateless-function */
 export class UserJobList extends React.Component {
   constructor(props) {
@@ -28,7 +29,6 @@ export class UserJobList extends React.Component {
     this.props.loadJobsRequest();
   }
   render() {
-    console.log(this.props)
     const { loading, jobs } = this.props.userjoblist;
     console.log(loading,jobs)
     if (loading) {
@@ -41,6 +41,7 @@ export class UserJobList extends React.Component {
             <TableHeader header={'Location'} />
             <TableHeader header={'Company'} />
             <TableHeader header={'Status'} />
+            {/* <Client/> */}
           </TableRow>
           {jobs.map((job, i) => {
             const { title, location, company, status } = job;

@@ -34,3 +34,27 @@ export function clearToken() {
     };
   }
 }
+
+export function setId(id) {
+  try {
+    localStorage.setItem('id', id);
+  } catch (error) {
+    return {
+      error: {
+        message: 'Invalid id',
+      },
+    };
+  }
+}
+
+export function getId() {
+  try {
+    return localStorage.getItem('id');
+  } catch (error) {
+    return {
+      error: {
+        message: 'No id',
+      },
+    };
+  }
+}

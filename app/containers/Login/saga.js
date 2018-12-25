@@ -15,16 +15,21 @@ import { loginSuccessful, loginError } from './actions';
 import { LOGIN_ERROR } from './constants';
 import { CLIENT_SET, CLIENT_UNSET } from '../Client/constants';
 import makeSelectLogin from './selectors';
-import {setToken} from '../../services/token'
+import {setToken, setId, getId} from '../../services/token'
+
 // Individual exports for testing
 export function* attemptLogin(userObj) {
+  console.log('inside attemptlogin')
   try {
     const response = yield callAPI('POST', '/users/login', false, userObj);
-    yield put(setClient(response));
+    console.log(response, 'response')
+    // yield put(setClient(response));
     yield put(loginSuccessful());
-    const client = yield select(makeSelectLogin());
-    const { id, token } = client;
+    // const client = yield select(makeSelectLogin());
+    // const { id, token } = client;
+    const {token,id} = response
     yield setToken(token)
+    yield setId(id)
     yield put(push(`/users/${id}`));
   } catch (error) {
     yield put(loginError(error));

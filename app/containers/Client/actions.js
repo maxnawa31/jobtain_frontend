@@ -13,7 +13,6 @@ export function defaultAction() {
 }
 
 export function setClient(userObj) {
-  console.log(userObj)
   return {
     type: CLIENT_SET,
     userObj,

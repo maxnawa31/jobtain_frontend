@@ -4,13 +4,16 @@ import { loadJobsError, loadJobsSuccess } from './actions';
 import { LOAD_JOBS_REQUEST } from './constants';
 import { callAPI } from '../../services/api';
 import makeSelectLogin from '../Login/selectors';
+import { getId } from '../../services/token';
 // Individual exports for testing
 
 function* fetchJobsAsync() {
   try {
-    const client = yield select(makeSelectLogin());
-    const { id } = client;
-    const response = yield callAPI('GET', `users/${id}/applications`, true);
+    // const client = yield select(makeSelectLogin());
+    // const { id } = client;
+    const userId = yield getId()
+    console.log(userId, 'userId')
+    const response = yield callAPI('GET', `users/${userId}/applications`, true);
     yield put(loadJobsSuccess(response));
   } catch (error) {
     loadJobsError(error);
