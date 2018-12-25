@@ -13,13 +13,15 @@ export const initialState = fromJS({
 });
 
 function clientReducer(state = initialState, action) {
+  console.log('inside client reducer')
   switch (action.type) {
     case DEFAULT_ACTION:
+      return state
     case CLIENT_SET:
       const { id, token } = action.userObj;
-      return state.set('id', id, 'token', token);
+      return state.set('id', id).set('token', token);
     case CLIENT_UNSET:
-      return state.set('id', null, 'token', null);
+      return state.set('id', null).set('token', null);
     default:
       return state;
   }

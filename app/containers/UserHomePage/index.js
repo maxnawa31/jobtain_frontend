@@ -1,6 +1,6 @@
 /**
  *
- * Client
+ * UserHomePage
  *
  */
 
@@ -9,30 +9,35 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import UserJobList from '../UserJobList';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectClient from './selectors';
+import makeSelectUserHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { setClient } from './actions';
-export class Client extends React.Component {
+
+/* eslint-disable react/prefer-stateless-function */
+export class UserHomePage extends React.Component {
   render() {
-    return <div />;
+    return (
+      <div>
+        <UserJobList />
+      </div>
+    );
   }
 }
 
-Client.propTypes = {
-  setClient: PropTypes.func.isRequired,
+UserHomePage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  client: makeSelectClient(),
+  userhomepage: makeSelectUserHomePage(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    setClient: userObj => dispatch(setClient(userObj)),
+    dispatch,
   };
 }
 
@@ -41,11 +46,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'client', reducer });
-const withSaga = injectSaga({ key: 'client', saga });
+const withReducer = injectReducer({ key: 'userHomePage', reducer });
+const withSaga = injectSaga({ key: 'userHomePage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(Client);
+)(UserHomePage);

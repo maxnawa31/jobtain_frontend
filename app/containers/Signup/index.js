@@ -25,6 +25,9 @@ import {
   SignupContainer,
   SignupSidePanel,
 } from '../../components/StyledComponents/';
+import Errors from '../../components/Errors';
+import Messages from '../../components/Messages';
+import { ToastContainer, toast } from 'react-toastify';
 /* eslint-disable react/prefer-stateless-function */
 export class Signup extends React.Component {
   state = {
@@ -35,6 +38,12 @@ export class Signup extends React.Component {
     lastname: '',
   };
 
+  notify = () => {
+    // toast('Wow so easy');
+    toast.success('Success Notification !', {
+      position: toast.POSITION.BOTTOM_LEFT,
+    });
+  };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -43,9 +52,11 @@ export class Signup extends React.Component {
     this.props.signupRequest({ ...this.state });
   };
   render() {
+    const { requesting, messages, errors, successful } = this.props.signup;
     return (
       <SignupContainer>
         <SignupSidePanel />
+
         <SignupForm onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <SignupH1>Start tracking your jobs today!</SignupH1>
           <SignupInput name="email" type="text" placeholder="Email" />
@@ -55,11 +66,24 @@ export class Signup extends React.Component {
           <SignupInput name="lastname" type="text" placeholder="Last Name" />
           <SignupButton>Sign Up!</SignupButton>
         </SignupForm>
+
+        {/* {!requesting &&
+          !!errors.length && (
+            <Errors message="Failure to signup due to:" errors={errors} />
+          )}
+        {!requesting && !!messages.length && <Messages messages={messages} />}
+        {!requesting &&
+          successful && (
+            <div>
+              Signup Successful! <Link to="/login">Click here to Login »</Link>
+            </div>
+          )} */}
+
         <SignupSidePanel>
           <SignupButton>
             <Link
               style={{ textDecoration: 'none', color: 'black' }}
-              to="/login"
+              to="users/login"
             >
               Log in
             </Link>

@@ -13,7 +13,7 @@ export function defaultAction() {
 }
 
 export function setClient(userObj) {
-  const { id, token } = userObj;
+  console.log(userObj)
   return {
     type: CLIENT_SET,
     userObj,

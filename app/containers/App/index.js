@@ -14,7 +14,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from '../Login';
-import Signup from '../Signup'
+import Signup from '../Signup';
+import UserHomePage from '../UserHomePage';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
@@ -22,9 +23,10 @@ export default function App() {
   return (
     <div>
       <Switch>
+        <Route exact path="/users/login" component={Login} />
+        <Route exact path="/users/signup" component={Signup} />
+        <Route exact path="/users/:id" component={UserHomePage} />
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component = {Signup}/>
         <Route component={NotFoundPage} />
       </Switch>
     </div>

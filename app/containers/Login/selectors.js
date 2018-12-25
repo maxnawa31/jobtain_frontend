@@ -5,8 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the login state domain
  */
 
-const selectLoginDomain = state => state.get('login', initialState);
-
+const selectLoginDomain = state => state.get('client', initialState);
 /**
  * Other specific selectors
  */

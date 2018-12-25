@@ -17,7 +17,7 @@ import reducer from './reducer';
 import { loginRequest } from './actions';
 import saga from './saga';
 import { LoginForm, LoginInput, LoginButton, LoginSpan, LoginH1 } from '../../components/StyledComponents/LoginStyledComponents';
-
+import Client from '../Client'
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.Component {
   state = {
@@ -53,7 +53,8 @@ export class Login extends React.Component {
           />
           <LoginButton login type="submit" placeholder="Log In">Log In</LoginButton>
           <LoginSpan>Or</LoginSpan>
-          <LoginButton type="submit" placeholder="Log In"><Link style={{textDecoration:'none', color:'black'}} to='/signup'>Sign Up</Link></LoginButton>
+          <Client/>
+          <LoginButton type="submit" placeholder="Log In"><Link style={{textDecoration:'none', color:'black'}} to='users/signup'>Sign Up</Link></LoginButton>
         </LoginForm>
       </div>
     );

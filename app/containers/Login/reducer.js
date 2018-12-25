@@ -16,10 +16,11 @@ export const initialState = fromJS({
   requesting: false,
   successful: false,
   messages: [],
-  erros: [],
+  errors: [],
 });
 
 function loginReducer(state = initialState, action) {
+  console.log('inside login Reducer')
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
@@ -35,12 +36,13 @@ function loginReducer(state = initialState, action) {
         .set('requesting', false)
         .set('successful', true);
     case LOGIN_ERROR:
+      state.set('errors', []);
       return state
         .set(
           'errors',
-          state.errors.concat([
-            { body: action.error.toString(), time: new Date() },
-          ]),
+          state
+            .get('errors')
+            .concat([{ body: action.error.toString(), time: new Date() }]),
         )
         .set('messages', [])
         .set('requesting', false)

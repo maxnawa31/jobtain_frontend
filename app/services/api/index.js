@@ -14,7 +14,8 @@ const api = axios.create({
 export async function callAPI(method, path, authRequired, payload) {
   const requestHeaders = {};
   if (authRequired) {
-    requestHeaders.Authorization = `Bearer ${getToken()}`;
+    requestHeaders.authorization = `Bearer ${getToken()}`;
+    console.log(requestHeaders)
   }
   try {
     method = method.toLowerCase();
@@ -28,7 +29,7 @@ export async function callAPI(method, path, authRequired, payload) {
     const response = await api.request({
       method,
       url:path,
-      header: requestHeaders,
+      headers: requestHeaders,
       data: payload
     })
     return response.data
