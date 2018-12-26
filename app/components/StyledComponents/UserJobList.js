@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StyledTable = styled.table`
   margin: 0 auto;
+  width: 75%;
 `;
 
 export const StyledRow = styled.tr`
@@ -10,7 +11,11 @@ export const StyledRow = styled.tr`
 `;
 
 export const StyledTableData = styled.td`
-  margin-right: 5%;
+  // margin-right: 5%;
+  // margin: 0 auto;
+  text-align: center;
+  padding-bottom: 2%;
+  border-bottom: 1px solid white;
 `;
 
 export const StyledTableDataLink = styled.a`
@@ -19,5 +24,6 @@ export const StyledTableDataLink = styled.a`
 `;
 
 export const StyledHeader = styled.th`
-  padding: 10px;
+  padding-bottom: 3%;
+  border-bottom: 1px solid white;
 `;
