@@ -18,7 +18,7 @@ import Signup from '../Signup';
 import UserHomePage from '../UserHomePage';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-
+import NewJobForm from '../NewJobForm'
 export default function App() {
   return (
     <div>
@@ -26,6 +26,7 @@ export default function App() {
         <Route exact path="/users/login" component={Login} />
         <Route exact path="/users/signup" component={Signup} />
         <Route exact path="/users/:id" component={UserHomePage} />
+        <Route exact path = "/users/applications/new" component = {NewJobForm}/>
         <Route exact path="/" component={HomePage} />
         <Route component={NotFoundPage} />
       </Switch>

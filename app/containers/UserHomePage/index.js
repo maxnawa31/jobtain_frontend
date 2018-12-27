@@ -15,12 +15,14 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectUserHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-
+import NewJobForm from '../NewJobForm'
+import {Link} from 'react-router-dom';
 /* eslint-disable react/prefer-stateless-function */
 export class UserHomePage extends React.Component {
   render() {
     return (
       <div>
+        <Link to = "/users/applications/new">Add application</Link>
         <UserJobList />
       </div>
     );
