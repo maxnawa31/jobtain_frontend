@@ -31,7 +31,7 @@ class DropDown extends React.Component {
   }
 
   onChange(selectedObj) {
-    this.setState({ selectedValue: selectedObj.value });
+    this.setState({ selectedValue: selectedObj.value }, () => this.props.handleStatusChange(this.state.selectedValue));
   }
 
   render() {

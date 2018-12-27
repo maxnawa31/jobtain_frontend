@@ -26,14 +26,27 @@ export class NewJobForm extends React.Component {
     location: '',
     status: '',
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+  }
+
+  handleChange = (e) => {
+    this.setState({[e.target.name]: e.target.value}, () => console.log(this.state))
+  }
+
+  handleStatusChange = (status) => {
+    this.setState({status}, () => console.log(this.state))
+  }
   render() {
     return (
       <div>
-        <StyledForm action="">
-          <StyledInput name='title' placeholder="title" type="text"/>
-          <StyledInput name='company' placeholder='company' type="text"/>
-          <StyledInput name='location' placeholder = 'location' type="text"/>
-          <DropDown/>
+        <StyledForm onSubmit = {this.handleSubmit} action="">
+          <StyledInput onChange={this.handleChange} name='title' placeholder="title" type="text"/>
+          <StyledInput onChange={this.handleChange} name='company' placeholder='company' type="text"/>
+          <StyledInput onChange={this.handleChange} name='location' placeholder = 'location' type="text"/>
+          <DropDown handleStatusChange={this.handleStatusChange} name='status'/>
           <StyledInputButton>Add Application</StyledInputButton>
         </StyledForm>
       </div>
