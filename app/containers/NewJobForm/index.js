@@ -16,8 +16,13 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectNewJobForm from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import {StyledForm, StyledInput, StyledInputButton} from '../../components/StyledComponents/NewJobForm'
+import {
+  StyledForm,
+  StyledInput,
+  StyledInputButton,
+} from '../../components/StyledComponents/NewJobForm';
 import DropDown from '../../components/DropDown';
+import { newJobRequest } from './actions';
 /* eslint-disable react/prefer-stateless-function */
 export class NewJobForm extends React.Component {
   state = {
@@ -27,27 +32,45 @@ export class NewJobForm extends React.Component {
     status: '',
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
+    this.props.newJobRequest(this.state);
+  };
 
-  }
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-  handleChange = (e) => {
-    this.setState({[e.target.name]: e.target.value}, () => console.log(this.state))
-  }
-
-  handleStatusChange = (status) => {
-    this.setState({status}, () => console.log(this.state))
-  }
+  handleStatusChange = status => {
+    this.setState({ status }, () => console.log(this.state));
+  };
   render() {
     return (
       <div>
-        <StyledForm onSubmit = {this.handleSubmit} action="">
-          <StyledInput onChange={this.handleChange} name='title' placeholder="title" type="text"/>
-          <StyledInput onChange={this.handleChange} name='company' placeholder='company' type="text"/>
-          <StyledInput onChange={this.handleChange} name='location' placeholder = 'location' type="text"/>
-          <DropDown handleStatusChange={this.handleStatusChange} name='status'/>
-          <StyledInputButton>Add Application</StyledInputButton>
+        <StyledForm onSubmit={this.handleSubmit} action="">
+          <StyledInput
+            onChange={this.handleChange}
+            name="title"
+            placeholder="title"
+            type="text"
+          />
+          <StyledInput
+            onChange={this.handleChange}
+            name="company"
+            placeholder="company"
+            type="text"
+          />
+          <StyledInput
+            onChange={this.handleChange}
+            name="location"
+            placeholder="location"
+            type="text"
+          />
+          <DropDown
+            handleStatusChange={this.handleStatusChange}
+            name="status"
+          />
+          <StyledInputButton type="submit">Add Application</StyledInputButton>
         </StyledForm>
       </div>
     );
@@ -55,7 +78,7 @@ export class NewJobForm extends React.Component {
 }
 
 NewJobForm.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  newJobRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -64,7 +87,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    newJobRequest: newJobData => dispatch(newJobRequest(newJobData)),
   };
 }
 

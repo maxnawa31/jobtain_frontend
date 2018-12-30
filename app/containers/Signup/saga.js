@@ -9,7 +9,7 @@ export function* signupUserAsync(action) {
   try {
     const response = yield callAPI('POST', '/users', false, action.userObj);
     yield put(signupSucessful(response));
-    yield put(push('users/login'))
+    yield put(push('/users/login'))
   } catch (error) {
     yield put(signupError(error));
   }

@@ -18,8 +18,8 @@ import makeSelectLogin from './selectors';
 import {setToken, setId, getId} from '../../services/token'
 
 // Individual exports for testing
-export function* attemptLogin(userObj) {
-  console.log('inside attemptlogin')
+export function* attemptLogin(action) {
+  const {userObj} = action
   try {
     const response = yield callAPI('POST', '/users/login', false, userObj);
     console.log(response, 'response')
@@ -28,6 +28,7 @@ export function* attemptLogin(userObj) {
     // const client = yield select(makeSelectLogin());
     // const { id, token } = client;
     const {token,id} = response
+    console.log(token,id)
     yield setToken(token)
     yield setId(id)
     yield put(push(`/users/${id}`));
@@ -37,12 +38,13 @@ export function* attemptLogin(userObj) {
 }
 
 export default function* watchAttemptLogin() {
-  while (true) {
-    const { userObj } = yield take(LOGIN_REQUEST);
-    const task = yield fork(attemptLogin, userObj);
-    const action = yield take([CLIENT_UNSET, LOGIN_ERROR]);
-    if (action.type === CLIENT_UNSET) yield cancel(task);
+  // while (true) {
+  //   const { userObj } = yield take(LOGIN_REQUEST);
+  //   const task = yield fork(attemptLogin, userObj);
+  //   const action = yield take([CLIENT_UNSET, LOGIN_ERROR]);
+  //   if (action.type === CLIENT_UNSET) yield cancel(task);
 
-    // yield call(logout)
-  }
+  //   // yield call(logout)
+  // }
+  yield takeLatest(LOGIN_REQUEST, attemptLogin)
 }

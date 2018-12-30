@@ -12,6 +12,7 @@ const api = axios.create({
 });
 
 export async function callAPI(method, path, authRequired, payload) {
+  console.log('inside callAPI',payload)
   const requestHeaders = {};
   if (authRequired) {
     requestHeaders.authorization = `Bearer ${getToken()}`;
@@ -32,9 +33,10 @@ export async function callAPI(method, path, authRequired, payload) {
       headers: requestHeaders,
       data: payload
     })
+    console.log(response)
     return response.data
   } catch (error) {
     console.log(error);
-    return Promise.reject(error.response.data.error)
+    return error
   }
 }

@@ -15,14 +15,16 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectUserHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import NewJobForm from '../NewJobForm'
-import {Link} from 'react-router-dom';
+import NewJobForm from '../NewJobForm';
+import { Link } from 'react-router-dom';
+import { getId } from '../../services/token';
 /* eslint-disable react/prefer-stateless-function */
 export class UserHomePage extends React.Component {
   render() {
+    const id = getId();
     return (
       <div>
-        <Link to = "/users/applications/new">Add application</Link>
+        <Link to= {`/users/${id}/applications/new`}>Add application</Link>
         <UserJobList />
       </div>
     );

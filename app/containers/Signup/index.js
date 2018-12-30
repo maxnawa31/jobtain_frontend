@@ -67,27 +67,18 @@ export class Signup extends React.Component {
           <SignupButton>Sign Up!</SignupButton>
         </SignupForm>
 
-        {/* {!requesting &&
-          !!errors.length && (
-            <Errors message="Failure to signup due to:" errors={errors} />
-          )}
-        {!requesting && !!messages.length && <Messages messages={messages} />}
-        {!requesting &&
-          successful && (
-            <div>
-              Signup Successful! <Link to="/login">Click here to Login »</Link>
-            </div>
-          )} */}
-
         <SignupSidePanel>
-          <SignupButton>
-            <Link
-              style={{ textDecoration: 'none', color: 'black' }}
-              to="users/login"
-            >
-              Log in
-            </Link>
-          </SignupButton>
+          <Link
+            style={{
+              textDecoration: 'none',
+              color: 'black',
+              marginLeft:'10%',
+              marginTop: '3%',
+            }}
+            to="/users/login"
+          >
+            <SignupButton>Log in</SignupButton>
+          </Link>
         </SignupSidePanel>
       </SignupContainer>
     );

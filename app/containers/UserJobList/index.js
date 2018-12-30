@@ -41,16 +41,17 @@ export class UserJobList extends React.Component {
             <TableHeader header={'Location'} />
             <TableHeader header={'Company'} />
             <TableHeader header={'Status'} />
-            {/* <Client/> */}
+            <TableHeader header = {'Date Added'}/>
           </TableRow>
           {jobs.map((job, i) => {
-            const { title, location, company, status } = job;
+            const { title, location, company, status, timestamp } = job;
             return (
               <TableRow key={i}>
                 <TableData data={title} />
                 <TableData data={location} />
                 <TableData data={company} />
                 <TableData data={status} />
+                <TableData date data={timestamp}/>
               </TableRow>
             );
           })}

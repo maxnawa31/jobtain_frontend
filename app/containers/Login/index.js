@@ -9,15 +9,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectLogin from './selectors';
 import reducer from './reducer';
 import { loginRequest } from './actions';
 import saga from './saga';
-import { LoginForm, LoginInput, LoginButton, LoginSpan, LoginH1 } from '../../components/StyledComponents/LoginStyledComponents';
-import Client from '../Client'
+import {
+  LoginForm,
+  LoginInput,
+  LoginButton,
+  LoginSpan,
+  LoginH1,
+} from '../../components/StyledComponents/LoginStyledComponents';
+import Client from '../Client';
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.Component {
   state = {
@@ -27,6 +33,7 @@ export class Login extends React.Component {
   handleLogin = e => {
     e.preventDefault();
     const { email, password } = this.state;
+    console.log(email, password);
     const { loginRequest } = this.props;
     loginRequest(email, password);
   };
@@ -36,9 +43,8 @@ export class Login extends React.Component {
   render() {
     return (
       <div>
-
         <LoginForm onSubmit={this.handleLogin} action="">
-        <LoginH1>Start tracking your jobs today</LoginH1>
+          <LoginH1>Start tracking your jobs today</LoginH1>
           <LoginInput
             onChange={this.handleChange}
             name="email"
@@ -51,10 +57,26 @@ export class Login extends React.Component {
             type="password"
             placeholder="Password"
           />
-          <LoginButton login type="submit" placeholder="Log In">Log In</LoginButton>
+          <LoginButton login type="submit" placeholder="Log In">
+            Log In
+          </LoginButton>
           <LoginSpan>Or</LoginSpan>
           {/* <Client/> */}
-          <LoginButton type="submit" placeholder="Log In"><Link style={{textDecoration:'none', color:'black'}} to='users/signup'>Sign Up</Link></LoginButton>
+          <Link
+            style={{
+              textDecoration: 'none',
+              color: 'black',
+              margin: '0 auto',
+              height: '10%',
+              backgroundColor:"rgb(225,231,235)",
+              textAlign:'center',
+              paddingTop: '2%',
+              width: '70%',
+            }}
+            to="/users/signup"
+          >
+            Sign In
+          </Link>
         </LoginForm>
       </div>
     );

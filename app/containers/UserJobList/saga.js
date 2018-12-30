@@ -16,7 +16,7 @@ function* fetchJobsAsync() {
     const response = yield callAPI('GET', `users/${userId}/applications`, true);
     yield put(loadJobsSuccess(response));
   } catch (error) {
-    loadJobsError(error);
+    yield put(loadJobsError(error));
   }
 }
 
