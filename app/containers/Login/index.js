@@ -33,7 +33,6 @@ export class Login extends React.Component {
   handleLogin = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    console.log(email, password);
     const { loginRequest } = this.props;
     loginRequest(email, password);
   };

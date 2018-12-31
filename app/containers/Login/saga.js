@@ -6,8 +6,9 @@ import {
   takeLatest,
   fork,
   cancelled,
+  takeEvery
 } from 'redux-saga/effects';
-import { LOGIN_REQUEST } from './constants';
+import { LOGIN_REQUEST, LOGIN_SUCCESSFUL } from './constants';
 import { callAPI } from '../../services/api';
 import { push } from 'react-router-redux';
 import { setClient } from '../Client/actions';
@@ -15,36 +16,24 @@ import { loginSuccessful, loginError } from './actions';
 import { LOGIN_ERROR } from './constants';
 import { CLIENT_SET, CLIENT_UNSET } from '../Client/constants';
 import makeSelectLogin from './selectors';
-import {setToken, setId, getId} from '../../services/token'
+import { setToken, setId, getId } from '../../services/token';
 
 // Individual exports for testing
 export function* attemptLogin(action) {
-  const {userObj} = action
+  const { userObj } = action;
   try {
     const response = yield callAPI('POST', '/users/login', false, userObj);
-    console.log(response, 'response')
-    // yield put(setClient(response));
-    yield put(loginSuccessful());
-    // const client = yield select(makeSelectLogin());
-    // const { id, token } = client;
-    const {token,id} = response
-    console.log(token,id)
-    yield setToken(token)
-    yield setId(id)
+    yield put({type:LOGIN_SUCCESSFUL});
+    const { token, id } = response;
+    yield setToken(token);
+    yield setId(id);
     yield put(push(`/users/${id}`));
   } catch (error) {
-    yield put(loginError(error));
+    console.log(error)
+    yield put(loginError(error.message));
   }
 }
 
 export default function* watchAttemptLogin() {
-  // while (true) {
-  //   const { userObj } = yield take(LOGIN_REQUEST);
-  //   const task = yield fork(attemptLogin, userObj);
-  //   const action = yield take([CLIENT_UNSET, LOGIN_ERROR]);
-  //   if (action.type === CLIENT_UNSET) yield cancel(task);
-
-  //   // yield call(logout)
-  // }
-  yield takeLatest(LOGIN_REQUEST, attemptLogin)
+  yield takeEvery(LOGIN_REQUEST, attemptLogin);
 }
