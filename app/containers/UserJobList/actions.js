@@ -9,6 +9,11 @@ import {
   LOAD_JOBS_REQUEST,
   LOAD_JOBS_SUCCESS,
   LOAD_JOBS_ERROR,
+  SORT_COMPANY,
+  SORT_LOCATION,
+  SORT_STATUS,
+  SORT_TITLE,
+  SORT_DATE
 } from './constants';
 
 export function defaultAction() {
@@ -35,4 +40,34 @@ export function loadJobsError(error) {
     type: LOAD_JOBS_ERROR,
     error,
   };
+}
+
+export function sortCompany() {
+  return {
+    type: SORT_COMPANY,
+  };
+}
+
+export function sortLocation() {
+  return {
+    type: SORT_LOCATION
+  }
+}
+
+export function sortTitle() {
+  return {
+    type: SORT_TITLE
+  }
+}
+
+export function sortStatus() {
+  return {
+    type: SORT_STATUS
+  }
+}
+
+export function sortDate() {
+  return {
+    type: SORT_DATE
+  }
 }

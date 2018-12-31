@@ -9,7 +9,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { loadJobsRequest } from './actions';
+import {
+  loadJobsRequest,
+  sortCompany,
+  sortLocation,
+  sortStatus,
+  sortTitle,
+  sortDate
+} from './actions';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectUserJobList from './selectors';
@@ -19,7 +26,7 @@ import Table from '../../components/Table';
 import TableHeader from '../../components/Table/TableHeader';
 import TableRow from '../../components/Table/TableRow';
 import TableData from '../../components/Table/TableData';
-import Client from '../Client'
+
 /* eslint-disable react/prefer-stateless-function */
 export class UserJobList extends React.Component {
   constructor(props) {
@@ -30,34 +37,39 @@ export class UserJobList extends React.Component {
   }
   render() {
     const { loading, jobs } = this.props.userjoblist;
-    console.log(loading,jobs)
+    const {
+      sortCompany,
+      sortLocation,
+      sortStatus,
+      sortTitle,
+      sortDate,
+    } = this.props;
     if (loading) {
       return <div>Loading jobs.....</div>;
-    } else {
-      return (
-        <Table>
-          <TableRow>
-            <TableHeader header={'Title'} />
-            <TableHeader header={'Location'} />
-            <TableHeader header={'Company'} />
-            <TableHeader header={'Status'} />
-            <TableHeader header = {'Date Added'}/>
-          </TableRow>
-          {jobs.map((job, i) => {
-            const { title, location, company, status, timestamp } = job;
-            return (
-              <TableRow key={i}>
-                <TableData data={title} />
-                <TableData data={location} />
-                <TableData data={company} />
-                <TableData data={status} />
-                <TableData date data={timestamp}/>
-              </TableRow>
-            );
-          })}
-        </Table>
-      );
     }
+    return (
+      <Table>
+        <TableRow>
+          <TableHeader sort={sortTitle} header="Title" />
+          <TableHeader sort={sortLocation} header="Location" />
+          <TableHeader sort={sortCompany} header="Company" />
+          <TableHeader sort={sortStatus} header="Status" />
+          <TableHeader sort={sortDate} header="Date Added" />
+        </TableRow>
+        {jobs.map((job, i) => {
+          const { title, location, company, status, timestamp } = job;
+          return (
+            <TableRow key={i}>
+              <TableData data={title} />
+              <TableData data={location} />
+              <TableData data={company} />
+              <TableData data={status} />
+              <TableData date data={timestamp} />
+            </TableRow>
+          );
+        })}
+      </Table>
+    );
   }
 }
 
@@ -72,6 +84,11 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     loadJobsRequest: () => dispatch(loadJobsRequest()),
+    sortCompany: () => dispatch(sortCompany()),
+    sortLocation: () => dispatch(sortLocation()),
+    sortStatus: () => dispatch(sortStatus()),
+    sortTitle: () => dispatch(sortTitle()),
+    sortDate: () => dispatch(sortDate()),
   };
 }
 

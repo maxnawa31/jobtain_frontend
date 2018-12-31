@@ -27,3 +27,8 @@ export const StyledHeader = styled.th`
   padding-bottom: 3%;
   border-bottom: 1px solid white;
 `;
+
+export const StyledSortButton = styled.button`
+  outline: none;
+  cursor: pointer;
+`

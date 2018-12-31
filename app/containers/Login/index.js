@@ -44,7 +44,7 @@ export class Login extends React.Component {
     return (
       <div>
         <LoginForm onSubmit={this.handleLogin} action="">
-          <LoginH1>Start tracking your jobs today</LoginH1>
+          <LoginH1>Login to see your jobs</LoginH1>
           <LoginInput
             onChange={this.handleChange}
             name="email"
@@ -75,7 +75,7 @@ export class Login extends React.Component {
             }}
             to="/users/signup"
           >
-            Sign In
+            Sign Up
           </Link>
         </LoginForm>
       </div>
