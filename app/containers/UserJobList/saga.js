@@ -12,7 +12,6 @@ function* fetchJobsAsync() {
     // const client = yield select(makeSelectLogin());
     // const { id } = client;
     const userId = yield getId()
-    console.log(userId, 'userId')
     const response = yield callAPI('GET', `users/${userId}/applications`, true);
     yield put(loadJobsSuccess(response));
   } catch (error) {

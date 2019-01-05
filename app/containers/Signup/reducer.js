@@ -46,7 +46,6 @@ function signupReducer(state = initialState, action) {
         .set('requesting', false)
         .set('successful', true);
     case SIGNUP_ERROR:
-      console.log(state.get('errors'));
       state.set('errors', [])
       return state
         .set(

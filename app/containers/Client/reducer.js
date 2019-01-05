@@ -13,7 +13,6 @@ export const initialState = fromJS({
 });
 
 function clientReducer(state = initialState, action) {
-  console.log('inside client reducer')
   switch (action.type) {
     case DEFAULT_ACTION:
       return state

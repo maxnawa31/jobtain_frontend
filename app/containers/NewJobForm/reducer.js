@@ -19,7 +19,6 @@ export const initialState = fromJS({
 });
 
 function newJobFormReducer(state = initialState, action) {
-  console.log('inside newJobFormReducer', action)
   switch (action.type) {
     case NEW_JOB_REQUEST:
       return state.set('loading', true).set('error', false);

@@ -20,7 +20,6 @@ export const initialState = fromJS({
 });
 
 function loginReducer(state = initialState, action) {
-  console.log('inside login Reducer')
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;

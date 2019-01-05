@@ -45,7 +45,6 @@ class DropDown extends React.Component {
           isOpen,
           getToggleButtonProps,
           getItemProps,
-          highlightedIndex,
           getLabelProps,
         }) => (
           <div>

@@ -5,7 +5,6 @@ import { callAPI } from '../../services/api';
 import { push } from 'react-router-redux';
 // Individual exports for testing
 export function* signupUserAsync(action) {
-  console.log(action)
   try {
     const response = yield callAPI('POST', '/users', false, action.userObj);
     yield put(signupSucessful(response));

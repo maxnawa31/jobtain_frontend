@@ -23,7 +23,7 @@ import {
   LoginSpan,
   LoginH1,
 } from '../../components/StyledComponents/LoginStyledComponents';
-import Client from '../Client';
+
 /* eslint-disable react/prefer-stateless-function */
 export class Login extends React.Component {
   state = {
@@ -67,8 +67,8 @@ export class Login extends React.Component {
               color: 'black',
               margin: '0 auto',
               height: '10%',
-              backgroundColor:"rgb(225,231,235)",
-              textAlign:'center',
+              backgroundColor: 'rgb(225,231,235)',
+              textAlign: 'center',
               paddingTop: '2%',
               width: '70%',
             }}
