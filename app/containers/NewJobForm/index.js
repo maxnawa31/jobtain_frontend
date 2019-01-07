@@ -38,7 +38,9 @@ export class NewJobForm extends React.Component {
   };
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value },()=>console.log(this.state));
+    this.setState({ [e.target.name]: e.target.value }, () =>
+      console.log(this.state),
+    );
   };
 
   handleStatusChange = status => {

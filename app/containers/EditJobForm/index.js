@@ -15,11 +15,63 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectEditJobForm from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import {
+  StyledForm,
+  StyledInput,
+  StyledInputButton,
+} from '../../components/StyledComponents/NewJobForm';
+import DropDown from '../../components/DropDown';
 
 /* eslint-disable react/prefer-stateless-function */
 export class EditJobForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      company: '',
+      location: '',
+      status: '',
+    };
+  }
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value }, () =>
+      console.log(this.state),
+    );
+  };
   render() {
-    return <div>This is the edit job form</div>;
+    const { userId, postId } = this.props;
+    console.log(userId, postId);
+    return (
+      <div>
+        <StyledForm action="">
+          <StyledInput
+            onChange={this.handleChange}
+            name="title"
+            placeholder="title"
+            type="text"
+          />
+          <StyledInput
+            onChange={this.handleChange}
+            name="company"
+            placeholder="company"
+            type="text"
+          />
+          <StyledInput
+            onChange={this.handleChange}
+            name="location"
+            placeholder="location"
+            type="text"
+          />
+          <DropDown
+            handleStatusChange={this.handleStatusChange}
+            name="status"
+          />
+          <StyledInputButton type="submit">
+            Update Application
+          </StyledInputButton>
+        </StyledForm>
+      </div>
+    );
   }
 }
 
