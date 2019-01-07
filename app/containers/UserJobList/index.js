@@ -15,7 +15,7 @@ import {
   sortLocation,
   sortStatus,
   sortTitle,
-  sortDate
+  sortDate,
 } from './actions';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -55,16 +55,18 @@ export class UserJobList extends React.Component {
           <TableHeader sort={sortCompany} header="Company" />
           <TableHeader sort={sortStatus} header="Status" />
           <TableHeader sort={sortDate} header="Date Added" />
+          <TableHeader header="" />
         </TableRow>
         {jobs.map((job, i) => {
-          const { title, location, company, status, timestamp } = job;
+          const { title, location, company, status, timestamp, id } = job;
           return (
-            <TableRow key={i}>
+            <TableRow id={id} key={i}>
               <TableData data={title} />
               <TableData data={location} />
               <TableData data={company} />
               <TableData data={status} />
               <TableData date data={timestamp} />
+              <TableData edit postId={id} data={'Edit'} />
             </TableRow>
           );
         })}

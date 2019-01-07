@@ -10,7 +10,6 @@ import React from 'react';
 
 function Errors(props) {
   const { errors } = props;
-  console.log(errors)
   return (
     <div>
       <ul>
