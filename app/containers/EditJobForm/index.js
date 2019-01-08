@@ -40,7 +40,7 @@ export class EditJobForm extends React.Component {
   };
   render() {
     const { userId, postId } = this.props;
-    console.log(userId, postId);
+    console.log(this.props);
     return (
       <div>
         <StyledForm action="">
@@ -79,10 +79,15 @@ EditJobForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-  editjobform: makeSelectEditJobForm(),
-});
-
+function mapStateToProps(state,ownProps) {
+  const jobs = state.get('userJobList').get('jobs')
+  const foundJob = jobs.filter(job => {
+    return job.id.toString() === ownProps.postId
+  });
+  return {
+    foundJob
+  }
+}
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,

@@ -5,8 +5,11 @@ import { initialState } from './reducer';
  * Direct selector to the editJobForm state domain
  */
 
-const selectEditJobFormDomain = state => state.get('editJobForm', initialState);
+// const selectEditJobFormDomain = state => state.get('userJobList', initialState);
 
+function selectEditJobFormDomain(state) {
+  return state.get('userJobList', initialState);
+}
 /**
  * Other specific selectors
  */
@@ -15,8 +18,13 @@ const selectEditJobFormDomain = state => state.get('editJobForm', initialState);
  * Default selector used by EditJobForm
  */
 
-const makeSelectEditJobForm = () =>
-  createSelector(selectEditJobFormDomain, substate => substate.toJS());
+function getJobs(state, props) {
+  const jobs = state.get('userJobList').get('jobs');
+  const { id } = props;
+  return jobs.filter(job => job['id'] === id);
+}
+
+const makeSelectEditJobForm = id => createSelector([getJobs], job => job);
 
 export default makeSelectEditJobForm;
 export { selectEditJobFormDomain };
