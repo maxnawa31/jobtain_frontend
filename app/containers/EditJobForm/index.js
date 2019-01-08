@@ -26,11 +26,14 @@ import DropDown from '../../components/DropDown';
 export class EditJobForm extends React.Component {
   constructor(props) {
     super(props);
+    // const {foundJob} = props;
+    const foundJob = props['foundJob'][0];
+    const { title, company, location, status } = foundJob;
     this.state = {
-      title: '',
-      company: '',
-      location: '',
-      status: '',
+      title,
+      company,
+      location,
+      status,
     };
   }
   handleChange = e => {
@@ -38,9 +41,12 @@ export class EditJobForm extends React.Component {
       console.log(this.state),
     );
   };
+  handleStatusChange = status => {
+    this.setState({ status }, ()=>console.log(this.state));
+  };
   render() {
     const { userId, postId } = this.props;
-    console.log(this.props);
+    const { title, company, location, status } = this.state;
     return (
       <div>
         <StyledForm action="">
@@ -49,18 +55,21 @@ export class EditJobForm extends React.Component {
             name="title"
             placeholder="title"
             type="text"
+            value={title}
           />
           <StyledInput
             onChange={this.handleChange}
             name="company"
             placeholder="company"
             type="text"
+            value={company}
           />
           <StyledInput
             onChange={this.handleChange}
             name="location"
             placeholder="location"
             type="text"
+            value={location}
           />
           <DropDown
             handleStatusChange={this.handleStatusChange}
@@ -79,14 +88,14 @@ EditJobForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state,ownProps) {
-  const jobs = state.get('userJobList').get('jobs')
+function mapStateToProps(state, ownProps) {
+  const jobs = state.get('userJobList').get('jobs');
   const foundJob = jobs.filter(job => {
-    return job.id.toString() === ownProps.postId
+    return job.id.toString() === ownProps.postId;
   });
   return {
-    foundJob
-  }
+    foundJob,
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {
