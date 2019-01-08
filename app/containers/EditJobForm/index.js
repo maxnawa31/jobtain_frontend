@@ -21,7 +21,7 @@ import {
   StyledInputButton,
 } from '../../components/StyledComponents/NewJobForm';
 import DropDown from '../../components/DropDown';
-
+import { editJobRequest } from './actions';
 /* eslint-disable react/prefer-stateless-function */
 export class EditJobForm extends React.Component {
   constructor(props) {
@@ -42,14 +42,17 @@ export class EditJobForm extends React.Component {
     );
   };
   handleStatusChange = status => {
-    this.setState({ status }, ()=>console.log(this.state));
+    this.setState({ status }, () => console.log(this.state));
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.editJob(this.state);
   };
   render() {
-    const { userId, postId } = this.props;
     const { title, company, location, status } = this.state;
     return (
       <div>
-        <StyledForm action="">
+        <StyledForm onSubmit={this.handleSubmit} action="">
           <StyledInput
             onChange={this.handleChange}
             name="title"
@@ -85,7 +88,7 @@ export class EditJobForm extends React.Component {
 }
 
 EditJobForm.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  editJob: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -99,7 +102,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    editJob: jobData => dispatch(editJobRequest(jobData)),
   };
 }
 
