@@ -27,7 +27,7 @@ export default function App() {
         <Route
           exact
           path="/users/:userId/jobs/:postId/edit"
-          render = {(props) => <EditJobForm userId={props.match.params.userId} postId={props.match.params.postId}/>}
+          render = {(props) => <EditJobForm userId={props.match.params.userId} jobId={props.match.params.postId}/>}
         />
         <Route exact path="/users/login" component={Login} />
         <Route exact path="/users/signup" component={Signup} />

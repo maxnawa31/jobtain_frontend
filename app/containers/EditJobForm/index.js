@@ -46,7 +46,8 @@ export class EditJobForm extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.editJob(this.state);
+    const { userId, jobId } = this.props;
+    this.props.editJob(this.state, userId, jobId);
   };
   render() {
     const { title, company, location, status } = this.state;
@@ -94,7 +95,7 @@ EditJobForm.propTypes = {
 function mapStateToProps(state, ownProps) {
   const jobs = state.get('userJobList').get('jobs');
   const foundJob = jobs.filter(job => {
-    return job.id.toString() === ownProps.postId;
+    return job.id.toString() === ownProps.jobId;
   });
   return {
     foundJob,
@@ -102,7 +103,8 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    editJob: jobData => dispatch(editJobRequest(jobData)),
+    editJob: (jobData, userId, jobId) =>
+      dispatch(editJobRequest(jobData, userId, jobId)),
   };
 }
 

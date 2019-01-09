@@ -17,10 +17,12 @@ export function defaultAction() {
   };
 }
 
-export function editJobRequest(jobData) {
+export function editJobRequest(jobData, userId, jobId) {
   return {
     type: EDIT_JOB_REQUEST,
     jobData,
+    userId,
+    jobId
   };
 }
 
